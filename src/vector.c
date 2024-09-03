@@ -39,7 +39,7 @@ static void fix_vector_pointers_after_moving_stack (kissat *solver,
 }
 
 #endif
-
+//扩充 vector 大小，具体扩充多少不用用户关心，只需要传入 vector 指针即可
 unsigned *kissat_enlarge_vector (kissat *solver, vector *vector) {
   unsigneds *stack = &solver->vectors.stack;
   const size_t old_vector_size = kissat_size_vector (vector);
@@ -49,9 +49,9 @@ unsigned *kissat_enlarge_vector (kissat *solver, vector *vector) {
         (void *) vector);
 #endif
   assert (old_vector_size < MAX_VECTORS / 2);
-  const size_t new_vector_size = old_vector_size ? 2 * old_vector_size : 1;
+  const size_t new_vector_size = old_vector_size ? 2 * old_vector_size : 1;//扩展到原来大小的两倍
   size_t old_stack_size = SIZE_STACK (*stack);
-  size_t capacity = CAPACITY_STACK (*stack);
+  size_t capacity = CAPACITY_STACK (*stack);//获取容量
   assert (kissat_is_power_of_two (MAX_VECTORS));
   assert (capacity <= MAX_VECTORS);
   size_t available = capacity - old_stack_size;
@@ -155,7 +155,7 @@ static inline rank rank_offset (vector *unsorted, unsigned i) {
 #endif
 
 #define RANK_OFFSET(A) rank_offset (unsorted, (A))
-
+//碎片整理
 void kissat_defrag_vectors (kissat *solver, size_t size_unsorted,
                             vector *unsorted) {
   unsigneds *stack = &solver->vectors.stack;
@@ -232,7 +232,7 @@ void kissat_defrag_vectors (kissat *solver, size_t size_unsorted,
   kissat_check_vectors (solver);
   STOP (defrag);
 }
-
+//从vector中删除一个指定元素
 void kissat_remove_from_vector (kissat *solver, vector *vector,
                                 unsigned remove) {
   unsigned *begin = kissat_begin_vector (solver, vector), *p = begin;
@@ -255,7 +255,7 @@ void kissat_remove_from_vector (kissat *solver, vector *vector,
   (void) solver;
 #endif
 }
-
+//调整vector大小（只能缩小或不变）
 void kissat_resize_vector (kissat *solver, vector *vector,
                            size_t new_size) {
   const size_t old_size = kissat_size_vector (vector);
@@ -278,7 +278,7 @@ void kissat_resize_vector (kissat *solver, vector *vector,
   (void) solver;
 #endif
 }
-
+//释放所有vector
 void kissat_release_vectors (kissat *solver) {
   RELEASE_STACK (solver->vectors.stack);
   solver->vectors.usable = 0;

@@ -32,7 +32,9 @@
 #include "value.h"
 #include "vector.h"
 #include "watch.h"
-
+//added by cl
+#include "myVector.h"
+//end
 typedef struct datarank datarank;
 
 struct datarank {
@@ -74,6 +76,9 @@ typedef STACK (watch *) patches;
 struct kitten;
 
 struct kissat {
+  //added by cl
+  myVector htab; //存储变量参与冲突的频次
+  //end
 #if !defined(NDEBUG) || defined(METRICS)
   bool backbone_computing;
 #endif

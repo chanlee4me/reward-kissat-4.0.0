@@ -33,7 +33,7 @@ static void test_bump_rescale (void) {
         if (count++ & 1)
           PUSH_STACK (solver->analyzed, 1);
       }
-      kissat_bump_analyzed (solver);
+      kissat_bump_analyzed (solver, 0);
       CLEAR_STACK (solver->analyzed);
       if (prev >= solver->scinc || solver->scinc >= MAX_SCORE * 0.7 ||
           kissat_get_heap_score (scores, 0) >= MAX_SCORE * 0.7 ||

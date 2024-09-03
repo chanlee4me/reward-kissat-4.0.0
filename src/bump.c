@@ -51,29 +51,35 @@ void kissat_bump_score_increment (kissat *solver) {
   if (new_scinc > MAX_SCORE)
     kissat_rescale_scores (solver);
 }
-
+//
 static inline void bump_analyzed_variable_score (kissat *solver,
-                                                 unsigned idx) {
+                                                 unsigned idx, int glue) {
   heap *scores = &solver->scores;
   const double old_score = kissat_get_heap_score (scores, idx);
   const double inc = solver->scinc;
-  const double new_score = old_score + inc;
-  LOG ("new score[%u] = %g = %g + %g", idx, new_score, old_score, inc);
+  /*--------------added by cl---------------*/
+  double weight = 1.0 / glue;
+  int64_t sumConflicts = CONFLICTS;
+  int64_t freq = solver->htab.data[idx];
+  double new_score = old_score + inc + 2 * weight * freq /  sumConflicts;
+  // const double new_score = old_score + inc;
+  /*-------------------end------------------*/
+  // LOG ("new score[%u] = %g = %g + %g", idx, new_score, old_score, inc);
   kissat_update_heap (solver, scores, idx, new_score);
   if (new_score > MAX_SCORE)
     kissat_rescale_scores (solver);
 }
 
-void kissat_bump_variable (kissat *solver, unsigned idx) {
-  bump_analyzed_variable_score (solver, idx);
+void kissat_bump_variable (kissat *solver, unsigned idx, int glue) {
+  bump_analyzed_variable_score (solver, idx, glue);
 }
 
-static void bump_analyzed_variable_scores (kissat *solver) {
+static void bump_analyzed_variable_scores (kissat *solver, int glue) {
   flags *flags = solver->flags;
 
   for (all_stack (unsigned, idx, solver->analyzed))
     if (flags[idx].active)
-      bump_analyzed_variable_score (solver, idx);
+      bump_analyzed_variable_score (solver, idx, glue);
 
   kissat_bump_score_increment (solver);
 }
@@ -99,14 +105,17 @@ static void move_analyzed_variables_to_front_of_queue (kissat *solver) {
 
   CLEAR_STACK (solver->ranks);
 }
-
-void kissat_bump_analyzed (kissat *solver) {
+      // -------added by cl------
+void kissat_bump_analyzed (kissat *solver, int glue) {
+      // -------end------
   START (bump);
   const size_t bumped = SIZE_STACK (solver->analyzed);
   if (!solver->stable)
     move_analyzed_variables_to_front_of_queue (solver);
   else
-    bump_analyzed_variable_scores (solver);
+      // -------added by cl------
+    bump_analyzed_variable_scores (solver, glue);
+    // -------------end-----------
   ADD (literals_bumped, bumped);
   STOP (bump);
 }

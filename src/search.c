@@ -177,6 +177,10 @@ static bool searching (kissat *solver) {
 }
 
 int kissat_search (kissat *solver) {
+  //added by cl 
+  //初始化 htab,每个元素初始值为 0
+  initVector(&solver->htab, VARS);
+  //end
   REPORT (0, '*');
   int res = 0;
   if (solver->inconsistent)

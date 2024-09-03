@@ -56,7 +56,7 @@ static inline size_t kissat_offset_vector (kissat *solver, vector *vector) {
 }
 
 #endif
-
+//获取 vector 的大小
 static inline size_t kissat_size_vector (const vector *vector) {
 #ifdef COMPACT
   return vector->size;

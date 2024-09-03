@@ -64,7 +64,7 @@ static inline word kissat_align_w2rd (word w) {
 }
 
 bool kissat_has_suffix (const char *str, const char *suffix);
-
+//检查是否是2的幂
 static inline bool kissat_is_power_of_two (uint64_t w) {
   return w && !(w & (w - 1));
 }

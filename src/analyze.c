@@ -540,6 +540,21 @@ int kissat_analyze (kissat *solver, clause *conflict) {
   }
   int res;
   do {
+    // -------added by cl------
+    //统计每个变量在冲突子句中的出现频率
+    unsigned *lits = conflict->lits;
+    const unsigned conflict_size = conflict->size;
+    const unsigned *const end_of_lits = lits + conflict_size;
+    for (const unsigned *p = lits; p != end_of_lits; p++) {
+      const unsigned lit = *p;
+      assert (VALUE (lit) < 0);
+      const unsigned idx = IDX (lit);
+      if(idx >= getCapacity(&solver->htab)){
+        enlargeVector(&solver->htab);
+      }
+      solver->htab.data[idx]++;
+    }
+    // -------------end-----------
     LOGCLS (conflict, "analyzing conflict %" PRIu64, CONFLICTS);
     unsigned conflict_level;
     if (one_literal_on_conflict_level (solver, conflict, &conflict_level))
@@ -556,7 +571,7 @@ int kissat_analyze (kissat *solver, clause *conflict) {
       if (CONFLICTS > solver->limits.glue.conflicts)
         update_tier_limits (solver);
       res = 0; // And continue with new conflict analysis.
-    } else {
+    } else {  
       if (GET_OPTION (minimize)) {
         sort_deduced_clause (solver);
         kissat_minimize_clause (solver);
@@ -569,8 +584,13 @@ int kissat_analyze (kissat *solver, clause *conflict) {
       res = 1;
     }
     if (!EMPTY_STACK (solver->analyzed)) {
-      if (!solver->probing && GET_OPTION (bump))
-        kissat_bump_analyzed (solver);
+      if (!solver->probing && GET_OPTION (bump)){
+      // -------added by cl------
+        const int glue = SIZE_STACK (solver->levels);
+        kissat_bump_analyzed (solver, glue);
+        // -------------end-----------
+      }
+      
       kissat_reset_only_analyzed_literals (solver);
     }
   } while (!res);

@@ -12,14 +12,14 @@
 #define LD_MAX_VECTORS (sizeof (word) == 8 ? 48u : 28u)
 #endif
 
-#define MAX_VECTORS (((uint64_t) 1) << LD_MAX_VECTORS)
+#define MAX_VECTORS (((uint64_t) 1) << LD_MAX_VECTORS)  //2的48次方
 
 #define INVALID_VECTOR_ELEMENT UINT_MAX
 
 #define MAX_SECTOR MAX_SIZE_T
 
-typedef struct vector vector;
-typedef struct vectors vectors;
+typedef struct vector vector; //存储指向动态数组的首尾指针
+typedef struct vectors vectors;//动态数组本身
 
 struct vectors {
   unsigneds stack;
