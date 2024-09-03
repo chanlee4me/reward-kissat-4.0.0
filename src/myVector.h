@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 // 定义 myVector 结构体
 typedef struct myVector {
     unsigned capacity;   // 容量
@@ -12,15 +12,7 @@ typedef struct myVector {
 } myVector;
 
 // 初始化 myVector
-void initVector(myVector *vec, unsigned initialCapacity) {
-    vec->capacity = initialCapacity;
-    vec->size = 0;
-    vec->data = (int *)malloc(sizeof(int) * vec->capacity);
-    if (vec->data == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
-}
+void initVector(myVector *vec, unsigned initialCapacity);
 
 // 扩大容量
 void enlargeVector(myVector *vec);
