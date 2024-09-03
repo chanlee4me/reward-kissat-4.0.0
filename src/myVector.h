@@ -1,20 +1,6 @@
 #ifndef MYVECTOR_H
 #define MYVECTOR_H
 
-typedef struct myVector {
-    unsigned capacity;   // 容量
-    unsigned size;       // 大小
-    int *data;           // 指向数据的指针
-}myVector;
-
-// 初始化myVector
-void initVector(myVector *vec, unsigned initialCapacity);
-
-// 检查容量
-unsigned getCapacity(myVector *vec);
-
-// 检查大小
-unsigned getSize(myVector *vec);
 #include <stdio.h>
 #include <stdlib.h>
 
