@@ -50,6 +50,6 @@ head -n $total_files /tmp/unprocessed_files.txt | xargs -n 1 -P $num_cores -I {}
 
 # 合并所有临时文件到一个csv文件中
 for tmp_file in /home/wgf/chenli/SAT/reward-kissat-4.0.0/2022cnf.csv.*; do
-    cat "$tmp_file" >> "/home/wgf/chenli/SAT//home/wgf/chenli/SAT/reward-kissat-4.0.0/2022cnf.csv"
+    cat "$tmp_file" >> "/home/wgf/chenli/SAT/reward-kissat-4.0.0/2022cnf.csv"
     rm "$tmp_file" # 删除临时文件
 done
