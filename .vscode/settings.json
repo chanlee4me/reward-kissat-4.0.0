@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "watch.h": "c"
+        "watch.h": "c",
+        "kissat.h": "c",
+        "string": "c",
+        "string_view": "c"
     }
 }

@@ -3,7 +3,9 @@
 #include "handle.h"
 #include "kissat.h"
 #include "print.h"
-
+//added by cl
+#include "myVector.h"
+//end
 #include <assert.h>
 #include <stdbool.h>
 

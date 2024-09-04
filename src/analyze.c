@@ -549,7 +549,7 @@ int kissat_analyze (kissat *solver, clause *conflict) {
       const unsigned lit = *p;
       assert (VALUE (lit) < 0);
       const unsigned idx = IDX (lit);
-      if(idx >= getCapacity(&solver->htab)){
+      if(idx >= solver->htab.capacity){
         enlargeVector(&solver->htab);
       }
       solver->htab.data[idx]++;

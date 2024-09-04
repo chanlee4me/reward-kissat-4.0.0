@@ -17,12 +17,6 @@ void initVector(myVector *vec, unsigned initialCapacity);
 // 扩大容量
 void enlargeVector(myVector *vec);
 
-// 插入元素
-void insertElement(myVector *vec, int element);
-
-// 获取指向数据的指针
-int *getDataPointer(myVector *vec);
-
 // 清理 myVector
 void freeVector(myVector *vec);
 

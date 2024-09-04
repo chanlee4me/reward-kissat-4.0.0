@@ -13,10 +13,7 @@ void initVector(myVector *vec, unsigned initialCapacity) {
     }
 }
 
-// 检查容量
-unsigned getCapacity(myVector *vec) {
-    return vec->capacity;
-}
+
 //扩大容量
 void enlargeVector(myVector *vec) {
     unsigned newCapacity = 2 * vec->capacity;
@@ -34,30 +31,6 @@ void enlargeVector(myVector *vec) {
     vec->data = newData;
     vec->capacity = newCapacity;
 }
-// 检查大小
-unsigned getSize(myVector *vec) {
-    return vec->size;
-}
-
-// 扩大容量
-static void resizeVector(myVector *vec) {
-    vec->capacity *= 2;
-    vec->data = (int *)realloc(vec->data, sizeof(int) * vec->capacity);
-    if (vec->data == NULL) {
-        fprintf(stderr, "Memory reallocation failed\n");
-        exit(EXIT_FAILURE);
-    }
-}
-
-// 插入元素
-void insertElement(myVector *vec, int element) {
-    if (vec->size == vec->capacity) {
-        resizeVector(vec);
-    }
-    vec->data[vec->size] = element;
-    vec->size++;
-}
-
 
 // 清理 myVector
 void freeVector(myVector *vec) {

@@ -849,5 +849,6 @@ int kissat_application (kissat *solver, int argc, char **argv) {
   int res = run_application (solver, argc, argv, &cancel_alarm);
   if (cancel_alarm)
     alarm (0);
+  freeVector(solver->htab.data);
   return res;
 }
