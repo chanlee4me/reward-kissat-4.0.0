@@ -6,12 +6,12 @@
 #include <string.h>
 // 定义 myVector 结构体
 typedef struct myVector {
-    unsigned capacity;   // 容量
+    unsigned long long capacity;   // 容量
     int *data;           // 指向数据的指针
 } myVector;
 
 // 初始化 myVector
-void initVector(myVector *vec, unsigned initialCapacity);
+void initVector(myVector *vec, unsigned long long initialCapacity);
 
 // 扩大容量
 void enlargeVector(myVector *vec);
