@@ -170,7 +170,7 @@ void kissat_reserve (kissat *solver, int max_var) {
       kissat_activate_literal (solver, LIT (idx));
     //added by cl 
     //初始化 htab,每个元素初始值为 0
-    initVector(&solver->htab, VARS);
+    initVector(&solver->htab, max_var);
     //end
   }
 }
