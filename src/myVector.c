@@ -5,7 +5,6 @@
 // 初始化 myVector
 void initVector(myVector *vec, unsigned initialCapacity) {
     vec->capacity = initialCapacity;
-    vec->size = 0;
     vec->data = (int *)calloc(vec->capacity, sizeof(int));
     if (vec->data == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
@@ -37,5 +36,4 @@ void freeVector(myVector *vec) {
     free(vec->data);
     vec->data = NULL;
     vec->capacity = 0;
-    vec->size = 0;
 }

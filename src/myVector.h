@@ -7,7 +7,6 @@
 // 定义 myVector 结构体
 typedef struct myVector {
     unsigned capacity;   // 容量
-    unsigned size;       // 大小
     int *data;           // 指向数据的指针
 } myVector;
 
