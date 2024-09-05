@@ -3,7 +3,7 @@
 #include "myVector.h"
 
 // 初始化 myVector
-void initVector(myVector *vec, unsigned initialCapacity) {
+void initVector(myVector *vec, unsigned long long initialCapacity) {
     vec->capacity = initialCapacity;
     vec->data = (int *)calloc(vec->capacity, sizeof(int));
     if (vec->data == NULL) {
