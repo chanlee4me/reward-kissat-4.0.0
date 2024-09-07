@@ -1,11 +1,13 @@
 #!/bin/bash
 
-#updated by cl 2024/9/4 
+#updated by cl 2024/9/7
 cd /home/wgf/chenli/SAT/2022cnf
 #结果文件的位置
 processed_files="/home/wgf/chenli/SAT/reward-kissat-4.0.0/2022cnf.csv"
 #处理的cnf文件个数
 total_files=400
+# 错误日志文件的位置
+error_log="/home/wgf/chenli/SAT/reward-kissat-4.0.0/error.log"
 
 # 获取系统的CPU核心数
 num_cores=$(nproc)
@@ -25,7 +27,7 @@ head -n $total_files /tmp/unprocessed_files.txt | xargs -n 1 -P $num_cores -I {}
     
     temp_file=$(mktemp)
     printf "%s," "$str" >> "$temp_file"
-    result=$(timeout 3600 /home/wgf/chenli/SAT/reward-kissat-4.0.0/build/kissat "$str")
+    result=$(timeout 3600 /home/wgf/chenli/SAT/reward-kissat-4.0.0/build/kissat "$str" 2>>'"$error_log"')
     echo "$result" | awk -F "[{}]" "/statistics/{flag1=1;next} flag1{print \$0; if(++n1==29) flag1=0} /resources/{flag2=1;next} flag2{print \$0; if(++n2==6) exit}" >> "$temp_file"
     
     # 提取结果状态

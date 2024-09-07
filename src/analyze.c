@@ -535,11 +535,12 @@ int kissat_analyze (kissat *solver, clause *conflict) {
     update_trail_average (solver);
     update_decision_rate_average (solver);
 #ifndef QUIET
-    UPDATE_AVERAGE (level, solver->level);
+    UPDATE_AVERAGE (level, solver->level);   
 #endif
   }
   int res;
   do {
+    LOGCLS (conflict, "analyzing conflict %" PRIu64, CONFLICTS);
     // -------added by cl------
     //统计每个变量在冲突子句中的出现频率
     unsigned *lits = conflict->lits;
@@ -550,13 +551,14 @@ int kissat_analyze (kissat *solver, clause *conflict) {
       assert (VALUE (lit) < 0);
       const unsigned idx = IDX (lit);
       if(idx >= solver->htab.capacity){
+        printf("htab.capacity = %d, idx = %u", solver->htab.capacity, idx);
         enlargeVector(&solver->htab);
       }
       solver->htab.data[idx]++;
     }
     // -------------end-----------
-    LOGCLS (conflict, "analyzing conflict %" PRIu64, CONFLICTS);
     unsigned conflict_level;
+    size_t myGlue = 0;
     if (one_literal_on_conflict_level (solver, conflict, &conflict_level))
       res = 1;
     else if (!conflict_level)
@@ -579,15 +581,17 @@ int kissat_analyze (kissat *solver, clause *conflict) {
           kissat_shrink_clause (solver);
       }
       analyze_reason_side_literals (solver);
+      //added by cl
+      myGlue = SIZE_STACK (solver->levels);
+      //end
       kissat_learn_clause (solver);
       reset_analysis_but_not_analyzed_literals (solver);
       res = 1;
     }
     if (!EMPTY_STACK (solver->analyzed)) {
       if (!solver->probing && GET_OPTION (bump)){
-      // -------added by cl------
-        const int glue = SIZE_STACK (solver->levels);
-        kissat_bump_analyzed (solver, glue);
+        // -------added by cl------
+        kissat_bump_analyzed (solver, myGlue);
         // -------------end-----------
       }
       

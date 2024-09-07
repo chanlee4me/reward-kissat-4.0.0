@@ -441,9 +441,6 @@ kissat_parse_dimacs (kissat * solver,
   if (!solver->inconsistent)
     kissat_defrag_watches (solver);
   STOP (parse);
-     //added by cl 
-    //初始化 htab,每个元素初始值为 0
-  initVector(&solver->htab, VARS);
-    //end
+
   return res;
 }

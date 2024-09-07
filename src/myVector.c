@@ -16,10 +16,10 @@ void initVector(myVector *vec, unsigned long long initialCapacity) {
 //扩大容量
 void enlargeVector(myVector *vec) {
     unsigned long long newCapacity = 2 * vec->capacity;
-    // if (newCapacity <= vec->capacity) {
-    //     fprintf(stderr, "New capacity must be greater than current capacity\n");
-    //     return;
-    // }
+    if (newCapacity <= vec->capacity) {
+        fprintf(stderr, "Capacity overflow: current capacity = %llu\n", vec->capacity);
+        return;
+    }
     int *newData = (int *)realloc(vec->data, sizeof(int) * newCapacity);
     if (newData == NULL) {
         fprintf(stderr, "Memory reallocation failed\n");

@@ -72,6 +72,7 @@ clause *kissat_deduce_first_uip_clause (kissat *solver, clause *conflict) {
   assert (EMPTY_STACK (solver->analyzed));
   assert (EMPTY_STACK (solver->levels));
   assert (EMPTY_STACK (solver->clause));
+  
 #if defined(LOGGING) || !defined(NDEBUG)
   CLEAR_STACK (solver->resolvent);
 #endif
