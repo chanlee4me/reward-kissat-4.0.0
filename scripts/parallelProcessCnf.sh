@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#updated by cl 2024/9/7
+#updated by cl 2024/9/4 
 cd /home/wgf/chenli/SAT/2022cnf
 #结果文件的位置
 processed_files="/home/wgf/chenli/SAT/reward-kissat-4.0.0/2022cnf.csv"
@@ -8,6 +8,8 @@ processed_files="/home/wgf/chenli/SAT/reward-kissat-4.0.0/2022cnf.csv"
 total_files=400
 # 错误日志文件的位置
 error_log="/home/wgf/chenli/SAT/reward-kissat-4.0.0/error.log"
+# 信息文件的位置
+info_file="/home/wgf/chenli/SAT/reward-kissat-4.0.0/info"
 
 # 获取系统的CPU核心数
 num_cores=$(nproc)
@@ -48,6 +50,9 @@ head -n $total_files /tmp/unprocessed_files.txt | xargs -n 1 -P $num_cores -I {}
     echo "end $str"
     
     mv "$temp_file" "/home/wgf/chenli/SAT/reward-kissat-4.0.0/2022cnf.csv.$BASHPID"
+    
+    # 提取并输出信息到 info 文件
+    echo "$result" | grep -E "htab.capacity = [0-9]+, (idx = [0-9]+|max_var = [0-9]+)" >> '"$info_file"'
 '
 
 # 合并所有临时文件到一个csv文件中
