@@ -3,7 +3,7 @@
 
 #include "stack.h"
 #include "utilities.h"
-
+#include "inlinevector.h"
 #include <limits.h>
 
 #ifdef COMPACT
