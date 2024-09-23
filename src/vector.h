@@ -54,7 +54,7 @@ void kissat_release_vectors (struct kissat *);
 //added by cl
 //added by cl
 //利用索引访问动态数组中的元素
-inline unsigned get_vector_element(kissat *solver, vector *v, size_t index) {
+unsigned get_vector_element(kissat *solver, vector *v, size_t index) {
   size_t size = kissat_size_vector(v);
   assert(index < size); // 确保索引在范围内
 
@@ -66,7 +66,7 @@ inline void append_zero_to_vector(kissat *solver, vector *v) {
   kissat_push_vectors(solver, v, 0); // 在 vector 末尾插入 0
 }
 //利用索引设置动态数组中的元素值
-inline void set_vector_element(kissat *solver, vector *v, size_t index, unsigned new_value) {
+void set_vector_element(kissat *solver, vector *v, size_t index, unsigned new_value) {
   size_t size = kissat_size_vector(v);
   assert(index < size);  // 检查索引范围
 

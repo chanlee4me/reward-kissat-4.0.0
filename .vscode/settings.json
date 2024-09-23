@@ -5,6 +5,8 @@
         "string": "c",
         "string_view": "c",
         "myvector.h": "c",
-        "smooth.h": "c"
+        "smooth.h": "c",
+        "inlinevector.h": "c",
+        "internal.h": "c"
     }
 }
