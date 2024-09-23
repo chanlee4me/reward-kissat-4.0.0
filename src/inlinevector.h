@@ -2,9 +2,7 @@
 #define _inlinevector_h_INCLUDED
 
 #include "internal.h"
-//added by cl
-#include "vector.h"
-//end
+
 static inline unsigned *kissat_begin_vector (kissat *solver,
                                              vector *vector) {
 #ifdef COMPACT

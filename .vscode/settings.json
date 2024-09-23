@@ -8,6 +8,8 @@
         "smooth.h": "c",
         "inlinevector.h": "c",
         "internal.h": "c",
-        "vector.h": "c"
+        "vector.h": "c",
+        "utilities.h": "c",
+        "stack.h": "c"
     }
 }
