@@ -54,5 +54,5 @@ void kissat_release_vectors (struct kissat *);
 //added by cl
 void inline append_zero_to_vector(kissat *solver, vector *v);
 unsigned inline get_vector_element(kissat *solver, vector *v, size_t index);
-void inline set_vector_element(kissat *solver, vector *v, size_t index, unsigned new_value)；
+void inline set_vector_element(kissat *solver, vector *v, size_t index, unsigned new_value);
 #endif
