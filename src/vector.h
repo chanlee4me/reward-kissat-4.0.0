@@ -18,8 +18,8 @@
 
 #define MAX_SECTOR MAX_SIZE_T
 
-typedef struct vector vector; //存储指向动态数组的首尾指针
-typedef struct vectors vectors;//动态数组本身
+typedef struct vector vector; 
+typedef struct vectors vectors;
 
 struct vectors {
   unsigneds stack;
@@ -51,5 +51,8 @@ void kissat_defrag_vectors (struct kissat *, size_t, vector *);
 void kissat_remove_from_vector (struct kissat *, vector *, unsigned);
 void kissat_resize_vector (struct kissat *, vector *, size_t);
 void kissat_release_vectors (struct kissat *);
-
+//added by cl
+void inline append_zero_to_vector(kissat *solver, vector *v);
+unsigned inline get_vector_element(kissat *solver, vector *v, size_t index);
+void inline set_vector_element(kissat *solver, vector *v, size_t index, unsigned new_value)；
 #endif

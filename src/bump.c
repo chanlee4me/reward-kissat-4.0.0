@@ -60,7 +60,7 @@ static inline void bump_analyzed_variable_score (kissat *solver,
   /*--------------added by cl---------------*/
   double weight = 1.0 / glue;
   int64_t sumConflicts = CONFLICTS;
-  int64_t freq = solver->htab.data[idx];
+  int64_t freq = get_vector_element(solver, &solver->htab, idx);
   double new_score = old_score + inc + 2 * weight * freq /  sumConflicts;
   // const double new_score = old_score + inc;
   /*-------------------end------------------*/

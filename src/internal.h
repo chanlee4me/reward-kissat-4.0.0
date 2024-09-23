@@ -33,7 +33,7 @@
 #include "vector.h"
 #include "watch.h"
 //added by cl
-#include "myVector.h"
+// #include "myVector.h"
 //end
 typedef struct datarank datarank;
 
@@ -77,7 +77,8 @@ struct kitten;
 
 struct kissat {
   //added by cl
-  myVector htab; //存储变量参与冲突的频次
+  vector htab;//存储变量参与冲突的频次
+  // myVector htab; //存储变量参与冲突的频次
   //end
 #if !defined(NDEBUG) || defined(METRICS)
   bool backbone_computing;
@@ -297,3 +298,6 @@ static inline unsigned kissat_assigned (kissat *solver) {
 void kissat_reset_last_learned (kissat *solver);
 
 #endif
+
+//added by cl
+void initialize_htab_with_zeros(kissat *solver, vector *htab, size_t N);

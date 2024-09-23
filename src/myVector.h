@@ -1,3 +1,4 @@
+//added by cl
 #ifndef _MYVECTOR_H_
 #define _MYVECTOR_H_
 
@@ -6,7 +7,7 @@
 #include <string.h>
 // 定义 myVector 结构体
 typedef struct myVector {
-    unsigned long long capacity;   // 容量
+    size_t capacity;   // 容量
     int *data;           // 指向数据的指针
 } myVector;
 
@@ -14,7 +15,7 @@ typedef struct myVector {
 void initVector(myVector *vec, unsigned long long initialCapacity);
 
 // 扩大容量
-void enlargeVector(myVector *vec);
+void inline enlargeVector(myVector *vec);
 
 // 清理 myVector
 void freeVector(myVector *vec);

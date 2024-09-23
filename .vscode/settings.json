@@ -4,6 +4,7 @@
         "kissat.h": "c",
         "string": "c",
         "string_view": "c",
-        "myvector.h": "c"
+        "myvector.h": "c",
+        "smooth.h": "c"
     }
 }

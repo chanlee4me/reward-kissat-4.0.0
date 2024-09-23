@@ -16,7 +16,6 @@
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 void kissat_reset_last_learned (kissat *solver) {
   for (really_all_last_learned (p))
     *p = INVALID_REF;
@@ -171,8 +170,7 @@ void kissat_reserve (kissat *solver, int max_var) {
   }
   //added by cl
   //初始化 htab,每个元素初始值为 0
-  initVector(&solver->htab, max_var);
-  printf("htab.capacity = %d, max_var = %d", solver->htab.capacity, max_var);
+  initialize_htab_with_zeros(solver, &solver->htab, max_var);
   //end
 }
 
@@ -514,4 +512,13 @@ int kissat_value (kissat *solver, int elit) {
   if (elit < 0)
     tmp = -tmp;
   return tmp < 0 ? -elit : elit;
+}
+//added by cl
+void initialize_htab_with_zeros(kissat *solver, vector *htab, size_t N) {
+  // 释放 htab 中已有的内容，确保它是空的
+  kissat_release_vector(solver, htab);
+  // 循环 N 次，将值为 0 的元素插入到 htab 中
+  for (size_t i = 0; i < N; ++i) {
+    kissat_push_vectors(solver, htab, 0);
+  }
 }

@@ -1,9 +1,10 @@
+//added by cl
 #include <stdio.h>
 #include <stdlib.h>
 #include "myVector.h"
 
 // 初始化 myVector
-void initVector(myVector *vec, unsigned long long initialCapacity) {
+void initVector(myVector *vec, size_t initialCapacity) {
     vec->capacity = initialCapacity;
     vec->data = (int *)calloc(vec->capacity, sizeof(int));
     if (vec->data == NULL) {
@@ -15,7 +16,7 @@ void initVector(myVector *vec, unsigned long long initialCapacity) {
 
 //扩大容量
 void enlargeVector(myVector *vec) {
-    unsigned long long newCapacity = 2 * vec->capacity;
+    size_t newCapacity = 2 * vec->capacity;
     if (newCapacity <= vec->capacity) {
         fprintf(stderr, "Capacity overflow: current capacity = %llu\n", vec->capacity);
         return;

@@ -550,11 +550,8 @@ int kissat_analyze (kissat *solver, clause *conflict) {
       const unsigned lit = *p;
       assert (VALUE (lit) < 0);
       const unsigned idx = IDX (lit);
-      if(idx >= solver->htab.capacity){
-        printf("htab.capacity = %d, idx = %u", solver->htab.capacity, idx);
-        enlargeVector(&solver->htab);
-      }
-      solver->htab.data[idx]++;
+      unsigned val = get_vector_element(solver, &solver->htab, idx);
+      set_vector_element(solver, &solver->htab, idx, val + 1);
     }
     // -------------end-----------
     unsigned conflict_level;
@@ -582,7 +579,7 @@ int kissat_analyze (kissat *solver, clause *conflict) {
       }
       analyze_reason_side_literals (solver);
       //added by cl
-      myGlue = SIZE_STACK (solver->levels);
+      // myGlue = SIZE_STACK (solver->levels);
       //end
       kissat_learn_clause (solver);
       reset_analysis_but_not_analyzed_literals (solver);
@@ -591,6 +588,7 @@ int kissat_analyze (kissat *solver, clause *conflict) {
     if (!EMPTY_STACK (solver->analyzed)) {
       if (!solver->probing && GET_OPTION (bump)){
         // -------added by cl------
+        myGlue = SIZE_STACK (solver->levels);
         kissat_bump_analyzed (solver, myGlue);
         // -------------end-----------
       }
