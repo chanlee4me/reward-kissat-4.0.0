@@ -52,7 +52,6 @@ void kissat_remove_from_vector (struct kissat *, vector *, unsigned);
 void kissat_resize_vector (struct kissat *, vector *, size_t);
 void kissat_release_vectors (struct kissat *);
 //added by cl
-//added by cl
 //利用索引访问动态数组中的元素
 unsigned get_vector_element(kissat *solver, vector *v, size_t index) {
   size_t size = kissat_size_vector(v);

@@ -297,7 +297,7 @@ static inline unsigned kissat_assigned (kissat *solver) {
 
 void kissat_reset_last_learned (kissat *solver);
 
-#endif
 
 //added by cl
 void initialize_htab_with_zeros(kissat *solver, vector *htab, size_t N);
+#endif

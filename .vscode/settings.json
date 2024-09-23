@@ -7,6 +7,7 @@
         "myvector.h": "c",
         "smooth.h": "c",
         "inlinevector.h": "c",
-        "internal.h": "c"
+        "internal.h": "c",
+        "vector.h": "c"
     }
 }
