@@ -1,23 +1,23 @@
-//added by cl
-#ifndef _MYVECTOR_H_
-#define _MYVECTOR_H_
+// //added by cl
+// #ifndef _MYVECTOR_H_
+// #define _MYVECTOR_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-// 定义 myVector 结构体
-typedef struct myVector {
-    size_t capacity;   // 容量
-    int *data;           // 指向数据的指针
-} myVector;
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// // 定义 myVector 结构体
+// typedef struct myVector {
+//     size_t capacity;   // 容量
+//     int *data;           // 指向数据的指针
+// } myVector;
 
-// 初始化 myVector
-void initVector(myVector *vec, unsigned long long initialCapacity);
+// // 初始化 myVector
+// void initVector(myVector *vec, unsigned long long initialCapacity);
 
-// 扩大容量
-void inline enlargeVector(myVector *vec);
+// // 扩大容量
+// void inline enlargeVector(myVector *vec);
 
-// 清理 myVector
-void freeVector(myVector *vec);
+// // 清理 myVector
+// void freeVector(myVector *vec);
 
-#endif // MYVECTOR_H
+// #endif // MYVECTOR_H

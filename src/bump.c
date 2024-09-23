@@ -52,7 +52,7 @@ void kissat_bump_score_increment (kissat *solver) {
     kissat_rescale_scores (solver);
 }
 //
-static inline void bump_analyzed_variable_score (kissat *solver,
+inline static void bump_analyzed_variable_score (kissat *solver,
                                                  unsigned idx, int glue) {
   heap *scores = &solver->scores;
   const double old_score = kissat_get_heap_score (scores, idx);

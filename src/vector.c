@@ -329,11 +329,11 @@ unsigned inline get_vector_element(kissat *solver, vector *v, size_t index) {
   return data[index];
 }
 //在队尾插入值为 0 的元素
-void inline append_zero_to_vector(kissat *solver, vector *v) {
+inline void append_zero_to_vector(kissat *solver, vector *v) {
   kissat_push_vectors(solver, v, 0); // 在 vector 末尾插入 0
 }
 //利用索引设置动态数组中的元素值
-void inline set_vector_element(kissat *solver, vector *v, size_t index, unsigned new_value) {
+inline void set_vector_element(kissat *solver, vector *v, size_t index, unsigned new_value) {
   size_t size = kissat_size_vector(v);
   assert(index < size);  // 检查索引范围
 
